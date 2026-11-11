@@ -1,16 +1,23 @@
-# React + Vite
+## Registro de usuarios
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+La aplicación permite registrar nuevos usuarios mediante el endpoint:
 
-Currently, two official plugins are available:
+POST /auth/registrar
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+El formulario solicita:
 
-## React Compiler
+- username
+- password
+- rol
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Después de un registro exitoso, el servidor responde con HTTP 201 Created y la aplicación redirige automáticamente al Login después de 2 segundos.
 
-## Expanding the ESLint configuration
+## Flujo de autenticación
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+1. Registro del usuario.
+2. Contraseña cifrada con BCrypt en el backend.
+3. Inicio de sesión.
+4. Generación del JWT.
+5. Almacenamiento del token en localStorage.
+6. Acceso a rutas protegidas.
+7. Logout e invalidación del token.
