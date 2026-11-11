@@ -1,11 +1,90 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+
+import { API_BASE_URL } from "../config/apiConfig";
+
 
 function Registrar() {
 
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [rol, setRol] = useState("USER");
+
+    const [mensajeExito, setMensajeExito] = useState("");
+    const [error, setError] = useState("");
+    const [enviando, setEnviando] = useState(false);
+
+    const navigate = useNavigate();
+
+
+    const manejarSubmit = async (e) => {
+
+        e.preventDefault();
+
+        setMensajeExito("");
+        setError("");
+        setEnviando(true);
+
+
+        try {
+
+            const response = await fetch(
+                `${API_BASE_URL}/auth/registrar`,
+                {
+                    method: "POST",
+
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+
+                    body: JSON.stringify({
+                        username,
+                        password,
+                        rol
+                    })
+                }
+            );
+
+
+            if (!response.ok) {
+
+                const mensajeServidor =
+                    await response.text();
+
+                throw new Error(
+                    mensajeServidor ||
+                    "No se pudo registrar el usuario"
+                );
+            }
+
+
+            await response.json();
+
+
+            setMensajeExito(
+                "Usuario registrado correctamente. Redirigiendo al inicio de sesión..."
+            );
+
+
+            setTimeout(() => {
+
+                navigate("/login");
+
+            }, 2000);
+
+
+        } catch (error) {
+
+            setError(
+                error.message ||
+                "Error al conectar con el servidor"
+            );
+
+        } finally {
+
+            setEnviando(false);
+        }
+    };
 
 
     return (
@@ -19,11 +98,14 @@ function Registrar() {
                 </h1>
 
                 <p className="auth-subtitle">
-                    Registra un nuevo usuario
+                    Completa tus datos para registrarte
                 </p>
 
 
-                <form className="auth-form">
+                <form
+                    className="auth-form"
+                    onSubmit={manejarSubmit}
+                >
 
                     <div className="form-group">
 
@@ -38,7 +120,9 @@ function Registrar() {
                             onChange={(e) =>
                                 setUsername(e.target.value)
                             }
+                            placeholder="Ingresa un nombre de usuario"
                             required
+                            disabled={enviando}
                         />
 
                     </div>
@@ -57,7 +141,9 @@ function Registrar() {
                             onChange={(e) =>
                                 setPassword(e.target.value)
                             }
+                            placeholder="Ingresa una contraseña"
                             required
+                            disabled={enviando}
                         />
 
                     </div>
@@ -75,6 +161,7 @@ function Registrar() {
                             onChange={(e) =>
                                 setRol(e.target.value)
                             }
+                            disabled={enviando}
                         >
 
                             <option value="USER">
@@ -90,11 +177,36 @@ function Registrar() {
                     </div>
 
 
+                    {mensajeExito && (
+
+                        <p className="mensaje-exito">
+                            {mensajeExito}
+                        </p>
+
+                    )}
+
+
+                    {error && (
+
+                        <p className="mensaje-error">
+                            {error}
+                        </p>
+
+                    )}
+
+
                     <button
                         className="auth-button"
                         type="submit"
+                        disabled={enviando}
                     >
-                        Registrarse
+
+                        {
+                            enviando
+                                ? "Registrando..."
+                                : "Registrarse"
+                        }
+
                     </button>
 
                 </form>
