@@ -9,6 +9,7 @@ import Perfil from "./pages/Perfil";
 import Registrar from "./pages/Registrar";
 
 import "./index.css";
+import Vehiculos from "./pages/Vehiculos";
 
 
 function App() {
@@ -39,6 +40,7 @@ function App() {
                             element={<Perfil />}
                         />
 
+                    <Route path="/vehiculos" element={<Vehiculos/>} />
                     </Route>
 
 
