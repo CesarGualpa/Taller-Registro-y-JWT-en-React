@@ -7,15 +7,12 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import Login from "./pages/Login";
 import Perfil from "./pages/Perfil";
 import Registrar from "./pages/Registrar";
+import GestionVehiculos from "./pages/GestionVehiculos";
 
 import "./index.css";
-import Vehiculos from "./pages/Vehiculos";
-
 
 function App() {
-
     return (
-
         <AuthProvider>
 
             <BrowserRouter>
@@ -40,7 +37,21 @@ function App() {
                             element={<Perfil />}
                         />
 
-                    <Route path="/vehiculos" element={<Vehiculos/>} />
+                        <Route
+                            path="/gestion"
+                            element={<GestionVehiculos />}
+                        />
+
+                        <Route
+                            path="/vehiculos"
+                            element={
+                                <Navigate
+                                    to="/gestion"
+                                    replace
+                                />
+                            }
+                        />
+
                     </Route>
 
 

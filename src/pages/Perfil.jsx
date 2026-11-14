@@ -57,7 +57,13 @@ function Perfil() {
             <div>
                 <h2>Perfil de Usuario</h2>
                 <button onClick={manejarLogOut}>Cerrar Sesion</button>
-                <button onClick={()=> navigate("/vehiculos")}>Gestionar Vehiculos</button>
+                <button
+                    onClick={() =>
+                        navigate("/gestion")
+                    }
+                >
+                    Gestionar Vehículos
+                </button>
             </div>
 
             {error && <p>{error}</p>}
