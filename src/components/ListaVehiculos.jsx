@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import { API_BASE_URL } from "../config/apiConfig";
 
-function ListarVehiculos({ vehiculos }) {
+function ListaVehiculos({ vehiculos }) {
     const [fotosUrl, setFotoUrls] = useState({});
     const { token } = useAuth();
     useEffect(
@@ -65,4 +65,4 @@ function ListarVehiculos({ vehiculos }) {
     );
 }
 
-export default ListarVehiculos;
+export default ListaVehiculos;

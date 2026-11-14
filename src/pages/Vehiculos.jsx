@@ -1,8 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import { API_BASE_URL } from "../config/apiConfig";
 import { useAuth } from "../context/AuthContext";
-import { useState, useEffect, useCallback} from "react";
-import listarVehiculos from "../components/ListaVehiculos";
+import { useState, useEffect, useCallback } from "react";
+import ListaVehiculos from "../components/ListaVehiculos";
 
 function Vehiculos() {
     const [marca, setMarca] = useState("");
@@ -11,9 +11,9 @@ function Vehiculos() {
     const [errorMsg, setErrorMsg] = useState("");
     const [succesMsg, setSuccesMsg] = useState("");
     const navigate = useNavigate();
-    const { token } = useAuth
-    const [ListaVehiculos, setListaVehiculos] = useState([]);
-    const cargarVehiculos = useCallback (async ()=>{
+    const { token } = useAuth();
+    const [vehiculos, setVehiculos] = useState([]);
+    const cargarVehiculos = useCallback(async () => {
         try {
             const response = await fetch(`${API_BASE_URL}/auth/vehiculos`, {
                 headers: {
@@ -24,12 +24,12 @@ function Vehiculos() {
                 throw new Error("No se pudo obtener la lista de vehiculos")
             }
             const datos = await response.json();
-            setListaVehiculos(datos);
+            setVehiculos(datos);
         } catch (error) {
             setErrorMsg(error.message)
         }
     }, [token])
-    useEffect(()=>{
+    useEffect(() => {
         cargarVehiculos();
     }, [cargarVehiculos])
     const manejarArchivo = (e) => {
@@ -48,7 +48,7 @@ function Vehiculos() {
         formData.append("marca", marca)
         formData.append("modelo", modelo)
         try {
-            const response = await fetch(`${API_BASE_URL}/auth/vehiculo/registrar`, {
+            const response = await fetch(`${API_BASE_URL}/auth/vehiculos/registrar`, {
                 method: "POST",
                 headers: {
                     Authorization: `Bearer ${token}`
@@ -93,8 +93,8 @@ function Vehiculos() {
                 <div>
                     <label>Foto: </label>
                     <input
-                        type="imege/*"
-                        value={marca}
+                        type="file"
+                        accept="image/*"
                         onChange={manejarArchivo}
                     />
                 </div>
@@ -102,8 +102,8 @@ function Vehiculos() {
             </form>
             {errorMsg && <p>{errorMsg}</p>}
             {succesMsg && <p>{succesMsg}</p>}
-            <listarVehiculos
-            vehiculos={ListaVehiculos}
+            <ListaVehiculos
+                vehiculos={vehiculos}
             />
         </div>
     );
