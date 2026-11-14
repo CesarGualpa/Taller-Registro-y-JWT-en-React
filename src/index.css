@@ -445,3 +445,577 @@ code {
   }
 
 }
+
+/* ========================================
+   GESTION DE VEHICULOS
+======================================== */
+
+.gestion-page {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 32px 24px 60px;
+}
+
+
+.gestion-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+
+    margin-bottom: 28px;
+}
+
+
+.gestion-header h1 {
+    margin: 0 0 6px;
+
+    font-size: 2rem;
+}
+
+
+.gestion-header p {
+    margin: 0;
+
+    color: #6b7280;
+}
+
+
+/* FORMULARIO */
+
+.form-panel {
+    margin-bottom: 38px;
+
+    padding: 26px;
+
+    background-color: #ffffff;
+
+    border-radius: 16px;
+
+    box-shadow:
+        0 8px 25px
+        rgba(15, 23, 42, 0.08);
+}
+
+
+.form-panel h2 {
+    margin-top: 0;
+    margin-bottom: 22px;
+}
+
+
+.vehiculo-form {
+    display: grid;
+
+    grid-template-columns:
+        repeat(
+            auto-fit,
+            minmax(220px, 1fr)
+        );
+
+    gap: 18px;
+
+    align-items: end;
+}
+
+
+.vehiculo-form .form-group {
+    display: flex;
+    flex-direction: column;
+
+    gap: 7px;
+}
+
+
+.vehiculo-form label,
+.modal-form label {
+    font-weight: 600;
+
+    color: #374151;
+}
+
+
+.vehiculo-form input,
+.modal-form input {
+    width: 100%;
+
+    padding: 11px 13px;
+
+    border: 1px solid #d1d5db;
+
+    border-radius: 8px;
+
+    background-color: #ffffff;
+
+    color: #111827;
+}
+
+
+.vehiculo-form input:focus,
+.modal-form input:focus {
+    outline: none;
+
+    border-color: #4f46e5;
+
+    box-shadow:
+        0 0 0 3px
+        rgba(79, 70, 229, 0.12);
+}
+
+
+/* BOTONES */
+
+.btn-principal,
+.btn-secundario,
+.btn-editar,
+.btn-eliminar {
+    border: none;
+
+    border-radius: 8px;
+
+    padding: 11px 16px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.2s,
+        opacity 0.2s,
+        box-shadow 0.2s;
+}
+
+
+.btn-principal {
+    background-color: #4f46e5;
+
+    color: white;
+}
+
+
+.btn-secundario {
+    background-color: #e5e7eb;
+
+    color: #1f2937;
+}
+
+
+.btn-editar {
+    flex: 1;
+
+    background-color: #2563eb;
+
+    color: #ffffff;
+}
+
+
+.btn-eliminar {
+    flex: 1;
+
+    background-color: #dc2626;
+
+    color: #ffffff;
+}
+
+
+.btn-principal:hover,
+.btn-secundario:hover,
+.btn-editar:hover,
+.btn-eliminar:hover {
+    transform: translateY(-1px);
+}
+
+
+button:disabled {
+    opacity: 0.55;
+
+    cursor: not-allowed;
+
+    transform: none;
+}
+
+
+/* LISTADO */
+
+.listado-section {
+    margin-top: 28px;
+}
+
+
+.listado-header {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-bottom: 20px;
+}
+
+
+.listado-header h2 {
+    margin: 0 0 5px;
+}
+
+
+.listado-header p {
+    margin: 0;
+
+    color: #6b7280;
+}
+
+
+/* GRID RESPONSIVE */
+
+.vehiculos-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(
+            auto-fill,
+            minmax(260px, 1fr)
+        );
+
+    gap: 24px;
+}
+
+
+/* CARD */
+
+.vehiculo-card {
+    overflow: hidden;
+
+    background-color: #ffffff;
+
+    border: 1px solid #e5e7eb;
+
+    border-radius: 16px;
+
+    box-shadow:
+        0 5px 18px
+        rgba(15, 23, 42, 0.08);
+
+    transition:
+        transform 0.25s,
+        box-shadow 0.25s;
+}
+
+
+.vehiculo-card:hover {
+    transform: translateY(-5px);
+
+    box-shadow:
+        0 14px 30px
+        rgba(15, 23, 42, 0.14);
+}
+
+
+.vehiculo-imagen-contenedor {
+    width: 100%;
+
+    aspect-ratio: 4 / 3;
+
+    background-color: #e5e7eb;
+
+    overflow: hidden;
+}
+
+
+.vehiculo-imagen {
+    display: block;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+}
+
+
+.imagen-cargando {
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    color: #6b7280;
+}
+
+
+.vehiculo-card-body {
+    padding: 20px;
+}
+
+
+.vehiculo-id {
+    display: inline-block;
+
+    margin-bottom: 8px;
+
+    padding: 4px 8px;
+
+    border-radius: 20px;
+
+    background-color: #eef2ff;
+
+    color: #4338ca;
+
+    font-size: 0.8rem;
+
+    font-weight: 600;
+}
+
+
+.vehiculo-card-body h3 {
+    margin:
+        4px 0 14px;
+
+    font-size: 1.35rem;
+}
+
+
+.vehiculo-card-body p {
+    margin:
+        7px 0;
+
+    color: #4b5563;
+}
+
+
+.mime-text {
+    overflow-wrap: anywhere;
+
+    font-size: 0.9rem;
+}
+
+
+.card-actions {
+    display: flex;
+
+    gap: 10px;
+
+    margin-top: 20px;
+}
+
+
+/* MENSAJES */
+
+.mensaje-exito {
+    margin-top: 16px;
+
+    padding: 12px;
+
+    border-radius: 8px;
+
+    background-color: #dcfce7;
+
+    color: #166534;
+}
+
+
+.mensaje-error {
+    margin-top: 16px;
+
+    padding: 12px;
+
+    border-radius: 8px;
+
+    background-color: #fee2e2;
+
+    color: #b91c1c;
+}
+
+
+.cargando-texto,
+.sin-registros {
+    padding: 40px;
+
+    text-align: center;
+
+    color: #6b7280;
+}
+
+
+/* ========================================
+   MODAL
+======================================== */
+
+.modal-overlay {
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 1000;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    padding: 20px;
+
+    background-color:
+        rgba(15, 23, 42, 0.65);
+}
+
+
+.modal-card {
+    width: 100%;
+
+    max-width: 520px;
+
+    max-height: 90vh;
+
+    overflow-y: auto;
+
+    padding: 26px;
+
+    background-color: white;
+
+    border-radius: 16px;
+
+    box-shadow:
+        0 20px 50px
+        rgba(0, 0, 0, 0.25);
+}
+
+
+.modal-header {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    gap: 15px;
+
+    margin-bottom: 22px;
+}
+
+
+.modal-header h2 {
+    margin: 0;
+}
+
+
+.modal-cerrar {
+    border: none;
+
+    background: transparent;
+
+    color: #6b7280;
+
+    font-size: 2rem;
+
+    line-height: 1;
+
+    cursor: pointer;
+}
+
+
+.modal-form {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 18px;
+}
+
+
+.modal-form .form-group {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 7px;
+}
+
+
+.modal-form small {
+    color: #6b7280;
+
+    line-height: 1.4;
+}
+
+
+.modal-actions {
+    display: flex;
+
+    justify-content: flex-end;
+
+    gap: 10px;
+
+    margin-top: 8px;
+}
+
+
+/* ========================================
+   RESPONSIVE
+======================================== */
+
+@media (max-width: 700px) {
+
+    .gestion-page {
+        padding:
+            20px 14px 40px;
+    }
+
+
+    .gestion-header {
+        flex-direction: column;
+
+        align-items: stretch;
+    }
+
+
+    .gestion-header h1 {
+        font-size: 1.7rem;
+    }
+
+
+    .gestion-header .btn-secundario {
+        width: 100%;
+    }
+
+
+    .vehiculo-form {
+        grid-template-columns: 1fr;
+    }
+
+
+    .vehiculos-grid {
+        grid-template-columns: 1fr;
+    }
+
+
+    .form-panel {
+        padding: 20px 16px;
+
+        border-radius: 12px;
+    }
+
+
+    .card-actions {
+        flex-direction: column;
+    }
+
+
+    .modal-card {
+        padding: 20px 16px;
+
+        border-radius: 12px;
+    }
+
+
+    .modal-actions {
+        flex-direction: column-reverse;
+    }
+
+
+    .modal-actions button {
+        width: 100%;
+    }
+}
