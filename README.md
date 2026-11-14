@@ -21,3 +21,36 @@ Después de un registro exitoso, el servidor responde con HTTP 201 Created y la 
 5. Almacenamiento del token en localStorage.
 6. Acceso a rutas protegidas.
 7. Logout e invalidación del token.
+
+## CRUD de Vehículos con imágenes BLOB
+
+La aplicación permite gestionar vehículos protegidos mediante autenticación JWT.
+
+### Operaciones
+
+- Crear vehículos con imagen.
+- Consultar vehículos registrados.
+- Descargar las imágenes mediante un endpoint protegido.
+- Editar marca y modelo.
+- Reemplazar opcionalmente la imagen.
+- Eliminar vehículos.
+
+### Backend
+
+Spring Boot, Spring Security, JWT, JPA/Hibernate y PostgreSQL.
+
+### Frontend
+
+React, React Router, Fetch API, FormData, Blob y Object URL.
+
+### Endpoints
+
+POST /auth/vehiculos/registrar
+
+GET /auth/vehiculos
+
+GET /auth/vehiculos/{id}/foto
+
+PUT /auth/vehiculos/{id}
+
+DELETE /auth/vehiculos/{id}
